@@ -6,8 +6,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form ID="formularioSoftwareEdit" action="" method="POST" enctype="multipart/form-data" autocomplete="off">
-                    <input type="hidden" name="ID" id="idSoftware" />
+                    <form id="formularioSoftwareEdit" action="" method="POST" enctype="multipart/form-data" autocomplete="off">
+                        <input type="hidden" name="ID" id="IDSoftware" />
                         <!-- ID_equipo -->
                         <div class="mb-3">
                             <label class="form-label">ID Equipo</label>
@@ -18,7 +18,7 @@
                         <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">version Windows</label>
-                            <select name="windows" ID="ver_windows" class="form-select" required>
+                            <select name="ver_windows" ID="ver_windows" class="form-select" required>
                                 <option selected value="">Seleccione</option>
                                 <?php
                                 $windowsLista = array(
@@ -29,15 +29,15 @@
                                     "Windows 7",
                                     "Windows XP"
                                 );
-                                foreach ($windowsLista as $windows) {
-                                    echo "<option value='$windows'>$windows</option>";
+                                foreach ($windowsLista as $ver_windows) {
+                                    echo "<option value='$ver_windows'>$ver_windows</option>";
                                 }
                                 ?>
                             </select>
                         </div>
                         <div class="col-md-8">
                             <label class="form-label">Key de Windows</label>
-                            <input type="text" name="Key_W" ID="Key_W" class="form-control" />
+                            <input type="text" name="Key_W" ID="Key_W" class="form-control" required/>
                         </div>
                         </div>
                         <!-- OFFICE -->
@@ -60,8 +60,8 @@
                                     "97",
                                     "95"
                                 );
-                                foreach ($OfficeLista as $Office) {
-                                    echo "<option value='$Office'>$Office</option>";
+                                foreach ($OfficeLista as $ver_office) {
+                                    echo "<option value='$ver_office'>$ver_office</option>";
                                 }
                                 ?>
                             </select>
@@ -76,6 +76,7 @@
                             <label class="form-label">Antivirus</label>
                             <input type="text" name="Antivirus" ID="Antivirus" class="form-control" />
                         </div>
+                        
                         <!-- Ip_interna -->
                         <div class="row">
                         <div class="col-md-6">
@@ -110,8 +111,8 @@
                         </div>
 
                         <div class="d-grid gap-2 mt-3">
-                            <button type="submit" class="btn btn-primary btn_add" onclick="actualizarEmpleado(event)">
-                                Registrar nuevo Software
+                            <button type="submit" class="btn btn-primary btn_add" onclick="actualizarSoftware(event)">
+                               Actualizar datos del Software
                             </button>
                         </div>
                     </form>

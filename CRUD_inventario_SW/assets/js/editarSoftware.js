@@ -1,7 +1,7 @@
 /**
  * Función para mostrar la modal de editar el Software
  */
-async function editarSoftware(idSoftware) {
+async function editarSoftware(IDSoftware) {
   try {
     // Ocultar la modal si está abierta
     const existingModal = document.getElementById("editarSoftwareModal");
@@ -32,7 +32,7 @@ async function editarSoftware(idSoftware) {
     );
     myModal.show();
 
-    await cargarDatosSoftwareEditar(idSoftware);
+    await cargarDatosSoftwareEditar(IDSoftware);
   } catch (error) {
     console.error(error);
   }
@@ -41,35 +41,29 @@ async function editarSoftware(idSoftware) {
 /**
  * Función buscar información del Software seleccionado y cargarla en la modal
  */
-async function cargarDatosSoftwareEditar(idSoftware) {
+async function cargarDatosSoftwareEditar(IDSoftware) {
   try {
     const response = await axios.get(
-      `acciones/detallesSoftware.php?id=${idSoftware}`
+      `acciones/detallesSoftware.php ? ID=${IDSoftware}`
     );
     if (response.status === 200) {
-      const { ID,ver_windows , Key_W , ver_office , Key_of , Antivirus , fecha_inicio , Ip_interna,otra_ip ,ip02,ip03,maclan,macwifi,ID_equipo} =
-        response.data;
+      const { ID,ID_equipo,ver_windows,Key_W,ver_office,Key_of,Antivirus,Ip_interna,otra_ip ,ip02,ip03,maclan,macwifi} =
+      response.data;
 
-      console.log(ID,ver_windows , Key_W , ver_office , Key_of , Antivirus , fecha_inicio , Ip_interna,otra_ip ,ip02,ip03,maclan,macwifi,ID_equipo);
-      document.querySelector("#ID").value = ID;
-      document.querySelector("#ver_windows").value = ver_windows;
-      document.querySelector("#Key_W").value = Key_W;
-      document.querySelector("#ver_office").value = ver_office;
+      console.log(ID,ID_equipo,ver_windows,Key_W,ver_office,Key_of,Antivirus,Ip_interna,otra_ip ,ip02,ip03,maclan,macwifi);
+      document.querySelector("#IDSoftware").value = ID;
+      document.querySelector("#ID_equipo").value = ID_equipo;
+      document.querySelector("#Key_W").value = Key_W; 
       document.querySelector("#Key_of").value = Key_of;
       document.querySelector("#Antivirus").value = Antivirus;
-      document.querySelector("#fecha_inicio").value = fecha_inicio;
       document.querySelector("#Ip_interna").value = Ip_interna;
       document.querySelector("#otra_ip").value = otra_ip;
       document.querySelector("#ip02").value = ip02;
       document.querySelector("#ip03").value = ip03;
       document.querySelector("#maclan").value = maclan;
       document.querySelector("#macwifi").value = macwifi;
-      document.querySelector("#ID_equipo").value = ID_equipo;
-
-      
-      // Obtener el elemento <select> de windows
-      seleccionarwindows(windows);
-      seleccionarOffice(Office);
+      seleccionarwindows(windowsSoftware);
+      seleccionarOffice(OfficeSoftware);
     } else {
       console.log("Error al cargar el Software a editar");
     }
@@ -83,11 +77,11 @@ async function cargarDatosSoftwareEditar(idSoftware) {
  * Función para seleccionar windows del Software
  */
 function seleccionarwindows(windowsSoftware) {
-  const selectwindows = document.querySelector("#windows");
+  const selectwindows = document.querySelector("#ver_windows");
   selectwindows.value = windowsSoftware;
 }
 function seleccionarOffice(OfficeSoftware) {
-  const selectOffice = document.querySelector("#Office");
+  const selectOffice = document.querySelector("#ver_office");
   selectOffice.value = OfficeSoftware;
 }
 
@@ -98,7 +92,7 @@ async function actualizarSoftware(event) {
     const formulario = document.querySelector("#formularioSoftwareEdit");
     // Crear un objeto FormData para enviar los datos del formulario
     const formData = new FormData(formulario);
-    const idSoftware = formData.get("ID");
+    const IDSoftware = formData.get("ID");
 
     // Enviar los datos del formulario al backend usando Axios
     const response = await axios.post("acciones/updateSoftware.php", formData);
@@ -108,7 +102,7 @@ async function actualizarSoftware(event) {
       console.log("Software actualizado exitosamente");
 
       // Llamar a la función para actualizar la tabla de Software
-      window.actualizarSoftwareEdit(idSoftware);
+      window.actualizarSoftwareEdit(IDSoftware);
 
       //Llamar a la función para mostrar un mensaje de éxito
       if (window.toastrOptions) {

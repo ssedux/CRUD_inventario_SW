@@ -3,10 +3,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     include("../config/config.php");
 
     // Obtener el ID de Software de la solicitud GET y asegurarse de que sea un entero
-    $IdSoftware = (int)$_GET['ID'];
+    $IDSoftware = (int)$_GET['ID'];
 
     // Realizar la consulta para obtener los detalles del Software con el ID proporcionado
-    $sql = "SELECT * FROM inventario_sw WHERE ID = $IdSoftware LIMIT 1";
+    $sql = "SELECT * FROM inventario_sw WHERE ID = $IDSoftware LIMIT 1";
     $resultado = $conexion->query($sql);
 
     // Verificar si la consulta se ejecutó correctamente

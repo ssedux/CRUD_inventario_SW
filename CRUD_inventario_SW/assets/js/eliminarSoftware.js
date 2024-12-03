@@ -40,7 +40,7 @@ async function cargarModalConfirmacion() {
 /**
  * Función para eliminar un Software desde la modal
  */
-async function eliminarSoftware(idSoftware) {
+async function eliminarSoftware(IDSoftware) {
   try {
     // Llamar a la función para cargar y mostrar la modal de confirmación
     await cargarModalConfirmacion();
@@ -48,30 +48,30 @@ async function eliminarSoftware(idSoftware) {
     // Establecer el ID y la ruta del avatar del Software en el botón de confirmación
     document
       .getElementById("confirmDeleteBtn")
-      .setAttribute("data-id", idSoftware);
+      .setAttribute("data-id", IDSoftware);
 
     // Agregar un event listener al botón "Eliminar Software"
     document
       .getElementById("confirmDeleteBtn")
       .addEventListener("click", async function () {
         // Obtener el ID del Software a eliminar
-        var idSoftware = this.getAttribute("data-id");
+        var IDSoftware = this.getAttribute("data-id");
 
         try {
           const response = await axios.post("acciones/delete.php", {
-            id: idSoftware,
+            id: IDSoftware,
           });
 
           if (response.status === 200) {
             // Eliminar la fila correspondiente a este Software de la tabla
-            document.querySelector(`#Software_${idSoftware}`).remove();
+            document.querySelector(`#Software_${IDSoftware}`).remove();
             //Llamar a la función para mostrar un mensaje de éxito
             if (window.toastrOptions) {
               toastr.options = window.toastrOptions;
               toastr.error("¡El Software se elimino correctamente!.");
             }
           } else {
-            alert(`Error al eliminar el Software con ID ${idSoftware}`);
+            alert(`Error al eliminar el Software con ID ${IDSoftware}`);
           }
         } catch (error) {
           console.error(error);

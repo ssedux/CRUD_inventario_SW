@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-hover" id="table_Software">
+    <table class="table table-hover" id="inventario_sw">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -8,6 +8,7 @@
                 <th scope="col">Office</th>
                 <th scope="col">Antivirus</th>
                 <th scope="col">fecha de inicio</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>

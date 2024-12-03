@@ -1,13 +1,13 @@
 // Define la función globalmente adjuntándola al objeto window
-window.actualizarSoftwareEdit = async function (idSoftware) {
+window.actualizarSoftwareEdit = async function (IDSoftware) {
   try {
     const response = await axios.get(
-      `acciones/getSoftware.php?id=${idSoftware}`
+      `acciones/getSoftware.php?id=${IDSoftware}`
     );
     if (response.status === 200) {
       const infoSoftware = response.data; // Obtener los datos del Software desde la respuesta
 
-      let tr = document.querySelector(`#Software_${idSoftware}`);
+      let tr = document.querySelector(`#Software_${IDSoftware}`);
       let tablaHTML = "";
       tablaHTML += `
           <tr id="Software_${infoSoftware.ID}">

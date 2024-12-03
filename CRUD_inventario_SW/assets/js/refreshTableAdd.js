@@ -4,7 +4,7 @@ window.insertSoftwareTable = async function () {
     const response = await axios.get(`acciones/getUltimoSoftware.php`);
     if (response.status === 200) {
       const infoSoftware = response.data; // Obtener los datos del Software desde la respuesta
-      let tableBody = document.querySelector("#table_Software tbody");
+      let tableBody = document.querySelector("#inventario_sw tbody");
 
       let tr = document.createElement("tr");
       tr.ID = `Software_${infoSoftware.ID}`;
