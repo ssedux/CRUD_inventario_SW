@@ -47,13 +47,29 @@ async function registrarSoftware(event) {
     event.preventDefault(); // Evitar que la página se recargue al enviar el formulario
     
     const formulario = document.querySelector("#formularioSoftware");
-    // Crear un objeto FormData para enviar los datos del formulario
     const formData = new FormData(formulario);
 
-    // Enviar los datos del formulario al backend usando Axios
+    // Validación: Revisar si algún campo requerido está vacío
+    let camposVacios = false;
+    formulario.querySelectorAll("input[required], select[required]").forEach(function(input) {
+      if (!input.value.trim()) {
+        camposVacios = true;
+        input.classList.add("is-invalid"); // Resalta el campo vacío
+      } else {
+        input.classList.remove("is-invalid"); // Quita el resaltado si el campo no está vacío
+      }
+    });
+
+    // Si hay campos vacíos, mostrar alerta y evitar el envío
+    if (camposVacios) {
+      toastr.options = window.toastrOptions;
+      toastr.error("Por favor, complete todos los campos requeridos.");
+      return; // Salir de la función y no enviar el formulario
+    }
+
+    // Si todos los campos son válidos, enviar los datos al backend
     const response = await axios.post("acciones/acciones.php", formData);
 
-    // Verificar la respuesta del backend
     if (response.status === 200) {
       // Llamar a la función insertSoftwareTable para insertar el nuevo registro en la tabla
       window.insertSoftwareTable();
@@ -62,9 +78,9 @@ async function registrarSoftware(event) {
         $("#agregarSoftwareModal").css("opacity", "");
         $("#agregarSoftwareModal").modal("hide");
 
-        //Llamar a la función para mostrar un mensaje de éxito
+        // Mensaje de éxito
         toastr.options = window.toastrOptions;
-        toastr.success("¡El Software se actualizo correctamente!.");
+        toastr.success("¡El Software se registró correctamente!");
       }, 600);
     } else {
       console.error("Error al registrar el Software");

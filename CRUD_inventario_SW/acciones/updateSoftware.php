@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $key_of = trim($_POST['Key_of']);
     $antivirus = trim($_POST['antivirus']);
     $fecha_inicio = date('Y-m-d');
-    $ip_i = trim($_POST['ip_interna']);
+    $ip_i = trim($_POST['Ip_interna']);
     $otra_ip = trim($_POST['otra_ip']);
     $ip02 = trim($_POST['ip02']);
     $ip03 = trim($_POST['ip03']);

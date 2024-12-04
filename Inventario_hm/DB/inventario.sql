@@ -78,14 +78,14 @@ CREATE TABLE `inventariof` (
 
 CREATE TABLE `inventario_sw` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `ID_equipo` varchar(25) NOT NULL,  -- El campo que debe coincidir con N_inventario en inventariof
+  `ID_equipo` varchar(25) DEFAULT NULL,  -- El campo que debe coincidir con N_inventario en inventariof
   `ver_windows` varchar(25) DEFAULT NULL,
   `Key_W` varchar(30) DEFAULT NULL,
   `ver_office` varchar(25) DEFAULT NULL,
   `Key_of` varchar(30) DEFAULT NULL,
   `Antivirus` varchar(25) DEFAULT NULL,
   `fecha_inicio` date DEFAULT NULL,
-  `Ip_interna` varchar(15) NOT NULL,
+  `Ip_interna` varchar(15) DEFAULT NULL,
   `otra_ip` varchar(15) DEFAULT NULL,
   `ip02` varchar(17) DEFAULT NULL,
   `ip03` varchar(17) DEFAULT NULL,

@@ -62,8 +62,8 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
       document.querySelector("#ip03").value = ip03;
       document.querySelector("#maclan").value = maclan;
       document.querySelector("#macwifi").value = macwifi;
-      seleccionarwindows(windowsSoftware);
-      seleccionarOffice(OfficeSoftware);
+      seleccionarwindows(ver_windows);
+      seleccionarOffice(ver_office);
     } else {
       console.log("Error al cargar el Software a editar");
     }

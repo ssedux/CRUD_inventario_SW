@@ -18,7 +18,7 @@
                         <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">version Windows</label>
-                            <select name="ver_windows" ID="ver_windows" class="form-select" required>
+                            <select name="windows" ID="ver_windows" class="form-select" required>
                                 <option selected value="">Seleccione</option>
                                 <?php
                                 $windowsLista = array(
