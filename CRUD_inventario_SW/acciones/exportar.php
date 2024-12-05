@@ -5,7 +5,7 @@
     $filename = "Software_" . $fecha_actual . ".csv";
 
     // Encabezados para el archivo CSV
-    $fields = array('ID', 'ID_equipo', 'ver_windows', 'Key_W', 'ver_office', 'Key_of', 'Antivirus', 'fecha_inicio', 'Ip_interna', 'otra_ip', 'ip02', 'ip03', 'maclan', 'macwifi');
+    $fields = array('ID', 'ID_equipo', 'ver_windows', 'Key_W', 'ver_office', 'Key_of', 'Antivirus', 'fecha_inicio', 'ip_i', 'otra_ip', 'ip02', 'ip03', 'maclan', 'macwifi');
 
     // Consulta SQL para obtener los datos de los Software
     $sql = "SELECT * FROM inventario_sw";

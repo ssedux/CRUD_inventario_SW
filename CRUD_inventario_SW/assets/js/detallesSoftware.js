@@ -50,7 +50,7 @@ async function cargarDetalleSoftware(IDSoftware) {
     );
     if (response.status === 200) {
       console.log(response.data);
-      const {ver_windows,Key_W,ver_office,Key_of,Antivirus,fecha_inicio,Ip_interna,otra_ip,ip02,ip03,maclan,macwifi,ID_equipo} =
+      const {ver_windows,Key_W,ver_office,Key_of,Antivirus,fecha_inicio,ip_i,otra_ip,ip02,ip03,maclan,macwifi,ID_equipo} =
         response.data;
 
       // Limpiar el contenido existente de la lista ul
@@ -80,7 +80,7 @@ async function cargarDetalleSoftware(IDSoftware) {
           ${fecha_inicio ? fecha_inicio : "No disponible"}
         </li>
         <li class="list-group-item"><b>IP interna:</b> 
-          ${Ip_interna ? Ip_interna : "No disponible"}
+          ${ip_i ? ip_i : "No disponible"}
         </li>
         <li class="list-group-item"><b>otra IP:</b> 
           ${otra_ip ? otra_ip : "No disponible"}

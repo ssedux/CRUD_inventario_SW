@@ -85,7 +85,7 @@ CREATE TABLE `inventario_sw` (
   `Key_of` varchar(30) DEFAULT NULL,
   `Antivirus` varchar(25) DEFAULT NULL,
   `fecha_inicio` date DEFAULT NULL,
-  `Ip_interna` varchar(15) DEFAULT NULL,
+  `ip_i` varchar(15) DEFAULT NULL,
   `otra_ip` varchar(15) DEFAULT NULL,
   `ip02` varchar(17) DEFAULT NULL,
   `ip03` varchar(17) DEFAULT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE `inventario_sw` (
 -- Volcado de datos para la tabla `inventario_sw`
 --
 
-INSERT INTO `inventario_sw` (`ID`, `ID_equipo`, `ver_windows`, `Key_W`, `ver_office`, `Key_of`, `Antivirus`, `fecha_inicio`, `Ip_interna`, `otra_ip`, `ip02`, `ip03`, `maclan`, `macwifi`) VALUES
+INSERT INTO `inventario_sw` (`ID`, `ID_equipo`, `ver_windows`, `Key_W`, `ver_office`, `Key_of`, `Antivirus`, `fecha_inicio`, `ip_i`, `otra_ip`, `ip02`, `ip03`, `maclan`, `macwifi`) VALUES
 (3, '1733-11-8M', '7 Profecional', 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX', '2010', 'xxxxxx-xxxx-xxx', 'Avast', '2023-07-27', '192.168.0.1', '63.90.00.10', '10', '10.255.255.255', '10.0.0.1', '102');
 
 

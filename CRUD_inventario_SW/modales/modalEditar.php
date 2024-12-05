@@ -77,11 +77,11 @@
                             <input type="text" name="Antivirus" ID="Antivirus" class="form-control" />
                         </div>
                         
-                        <!-- Ip_interna -->
+                        <!-- ip_i -->
                         <div class="row">
                         <div class="col-md-6">
                             <label class="form-label">Ip interna </label>
-                            <input type="text" name="Ip_interna" ID="Ip_interna" class="form-control" />
+                            <input type="text" name="ip_i" ID="ip_i" class="form-control" />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">otra ip </label>

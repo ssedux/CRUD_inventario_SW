@@ -91,7 +91,7 @@ $result = mysqli_query($conex, $query);
                 <td><?php echo $row['Key_of'] ?></td>
                 <td><?php echo $row['Antivirus'] ?></td>
                 <td><?php echo $row['fecha_inicio'] ?></td>
-                <td><?php echo $row['Ip_interna'] ?></td>
+                <td><?php echo $row['ip_i'] ?></td>
                 <td><?php echo $row['otra_ip'] ?></td>
                 <td><?php echo $row['maclan'] ?></td>
                 <td><?php echo $row['macwifi'] ?></td>

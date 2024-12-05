@@ -5,7 +5,7 @@ include("modelo/connection.php");
 if(isset($_POST['guardar'])){
     if (!empty($_POST['fecha_inicio']) &&
         strlen($_POST['antivirus']) >= 1 &&
-        strlen($_POST['ip_interna']) > 0 &&
+        strlen($_POST['ip_i']) > 0 &&
         strlen($_POST['maclan']) >= 1 &&
         !empty($_POST['ID_equipo'])){
 
@@ -15,7 +15,7 @@ if(isset($_POST['guardar'])){
         $version_OF = trim($_POST['ver_office']);
         $key_of = trim($_POST['Key_of']);
         $antivirus = trim($_POST['antivirus']);
-        $ip_i = trim($_POST['ip_interna']);
+        $ip_i = trim($_POST['ip_i']);
         $OTRA_IP = trim($_POST['otra_ip']);
         $mclan = trim($_POST['maclan']);
         $MCWIFI = trim($_POST['macwifi']);
@@ -23,7 +23,7 @@ if(isset($_POST['guardar'])){
         $ip02 = trim($_POST['ip02']);
         $ip03 = trim($_POST['ip03']);
         $consulta_ = "INSERT INTO inventario_sw(ID_equipo, ver_windows, Key_W, ver_office, 
-        Key_of, Antivirus, fecha_inicio, Ip_interna, otra_ip,ip02, ip03, maclan, macwifi) 
+        Key_of, Antivirus, fecha_inicio, ip_i, otra_ip,ip02, ip03, maclan, macwifi) 
         VALUES ('$id_equipo','$version_W','$key_w','$version_OF',
         '$key_of','$antivirus','$fecha_inicio','$ip_i','$OTRA_IP','$mclan','$ip02','$ip03','$MCWIFI')";
 
@@ -174,8 +174,8 @@ if(isset($_POST['guardar'])){
                 <input type="date" class="form-control" id="fecha" name="fecha_inicio" required>
             </div>
             <div class="mb-3">
-                <label for="IP_I" class="form-label">IP Interna</label>
-                <input type="text" class="form-control" id="IP_I" name="ip_interna" required>
+                <label for="ip_i" class="form-label">IP Interna</label>
+                <input type="text" class="form-control" id="ip_i" name="ip_i" required>
             </div>
             <div class="mb-3">
                 <label for="O_IP" class="form-label">Otra IP</label>
@@ -242,7 +242,7 @@ if(isset($_POST['guardar'])){
                         <td><?php echo $row['Key_of'] ?></td>
                         <td><?php echo $row['Antivirus'] ?></td>
                         <td><?php echo $row['fecha_inicio'] ?></td>
-                        <td><?php echo $row['Ip_interna'] ?></td>
+                        <td><?php echo $row['ip_i'] ?></td>
                         <td><?php echo $row['otra_ip'] ?></td>
                         <td><?php echo $row['maclan'] ?></td>
                         <td><?php echo $row['macwifi'] ?></td>
@@ -315,7 +315,7 @@ if(isset($_POST['guardar'])){
                             document.getElementById("KEYO").value = inventario.Key_of;
                             document.getElementById("Antivirus").value = inventario.Antivirus;
                             document.getElementById("fecha").value = inventario.fecha_inicio;
-                            document.getElementById("IP_I").value = inventario.Ip_interna;
+                            document.getElementById("ip_i").value = inventario.ip_i;
                             document.getElementById("O_IP").value = inventario.otra_ip;
                             document.getElementById("MACLAN").value = inventario.maclan;
                             document.getElementById("MACWIFI").value = inventario.macwifi;
@@ -346,7 +346,7 @@ function confirmarNuevoRegistro() {
             document.getElementById("KEYO").value = "";
             document.getElementById("Antivirus").value = "";
             document.getElementById("fecha").value = "";
-            document.getElementById("IP_I").value = "";
+            document.getElementById("ip_i").value = "";
             document.getElementById("O_IP").value = "";
             document.getElementById("MACLAN").value = "";
             document.getElementById("MACWIFI").value = "";

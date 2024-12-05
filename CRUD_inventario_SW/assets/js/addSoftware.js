@@ -39,6 +39,7 @@ async function modalRegistrarSoftware() {
   }
 }
 
+
 /**
  * Función para enviar el formulario al backend
  */
@@ -51,10 +52,12 @@ async function registrarSoftware(event) {
 
     // Validación: Revisar si algún campo requerido está vacío
     let camposVacios = false;
+
     formulario.querySelectorAll("input[required], select[required]").forEach(function(input) {
       if (!input.value.trim()) {
-        camposVacios = true;
-        input.classList.add("is-invalid"); // Resalta el campo vacío
+          camposVacios = true;
+          input.classList.add("is-invalid"); // Resalta el campo vacío
+        
       } else {
         input.classList.remove("is-invalid"); // Quita el resaltado si el campo no está vacío
       }
@@ -89,3 +92,4 @@ async function registrarSoftware(event) {
     console.error("Error al enviar el formulario", error);
   }
 }
+

@@ -16,14 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $key_of = trim($_POST['Key_of']);
         $antivirus = trim($_POST['Antivirus']);
         $fecha_inicio = date('Y-m-d');
-        $ip_i = trim($_POST['Ip_interna']);
+        $ip_i = trim($_POST['ip_i']);
         $otra_ip = trim($_POST['otra_ip']);
         $ip02 = trim($_POST['ip02']);
         $ip03 = trim($_POST['ip03']);
         $mclan = trim($_POST['maclan']);
         $MCWIFI = trim($_POST['macwifi']);
         $sql = "INSERT INTO inventario_sw(ID_equipo, ver_windows, Key_W, ver_office, 
-                Key_of, Antivirus, fecha_inicio, Ip_interna, otra_ip,ip02, ip03, maclan, macwifi) 
+                Key_of, Antivirus, fecha_inicio, ip_i, otra_ip,ip02, ip03, maclan, macwifi) 
                 VALUES ('$id_equipo','$version_W','$key_w','$version_OF',
                 '$key_of','$antivirus','$fecha_inicio','$ip_i','$otra_ip','$ip02','$ip03','$mclan','$MCWIFI')";
     

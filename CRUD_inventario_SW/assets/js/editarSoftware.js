@@ -47,16 +47,16 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
       `acciones/detallesSoftware.php ? ID=${IDSoftware}`
     );
     if (response.status === 200) {
-      const { ID,ID_equipo,ver_windows,Key_W,ver_office,Key_of,Antivirus,Ip_interna,otra_ip ,ip02,ip03,maclan,macwifi} =
+      const { ID,ID_equipo,ver_windows,Key_W,ver_office,Key_of,Antivirus,ip_i,otra_ip ,ip02,ip03,maclan,macwifi} =
       response.data;
 
-      console.log(ID,ID_equipo,ver_windows,Key_W,ver_office,Key_of,Antivirus,Ip_interna,otra_ip ,ip02,ip03,maclan,macwifi);
+      console.log(ID,ID_equipo,ver_windows,Key_W,ver_office,Key_of,Antivirus,ip_i,otra_ip ,ip02,ip03,maclan,macwifi);
       document.querySelector("#IDSoftware").value = ID;
       document.querySelector("#ID_equipo").value = ID_equipo;
       document.querySelector("#Key_W").value = Key_W; 
       document.querySelector("#Key_of").value = Key_of;
       document.querySelector("#Antivirus").value = Antivirus;
-      document.querySelector("#Ip_interna").value = Ip_interna;
+      document.querySelector("#ip_i").value = ip_i;
       document.querySelector("#otra_ip").value = otra_ip;
       document.querySelector("#ip02").value = ip02;
       document.querySelector("#ip03").value = ip03;

@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $key_of = trim($_POST['Key_of']);
     $antivirus = trim($_POST['antivirus']);
     $fecha_inicio = date('Y-m-d');
-    $ip_i = trim($_POST['Ip_interna']);
+    $ip_i = trim($_POST['ip_i']);
     $otra_ip = trim($_POST['otra_ip']);
     $ip02 = trim($_POST['ip02']);
     $ip03 = trim($_POST['ip03']);
@@ -23,12 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "UPDATE inventario_sw SET 
             ID_equipo='$id_equipo',
             ver_windows='$version_W', 
-            key_w='$key_w', 
+            key_W='$key_w', 
             ver_office='$version_OF', 
             Key_of='$key_of', 
-            antivirus='$antivirus', 
+            Antivirus='$antivirus', 
             fecha_inicio='$fecha_inicio'
-            ip_interna='$ip_i', 
+            ip_i='$ip_i', 
             otra_ip='$otra_ip', 
             ip02='$ip02', 
             ip03='$ip03',

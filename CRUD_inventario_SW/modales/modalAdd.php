@@ -3,7 +3,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 titulo_modal">Registrar Nuevo Software</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+
+             
                 </div>
                 <div class="modal-body">
                     <form id="formularioSoftware" action="" method="POST" enctype="multipart/form-data" autocomplete="off">
@@ -114,11 +116,11 @@
                             <label class="form-label">Antivirus</label>
                             <input type="text" name="Antivirus" class="form-control" required/> 
                         </div>
-                        <!-- Ip_interna -->
+                        <!-- ip_i -->
                         <div class="row">
                         <div class="col-md-6">
                             <label class="form-label">Ip interna </label>
-                            <input type="text" name="Ip_interna " class="form-control" required/>
+                            <input type="text" name="ip_i " class="form-control" required/>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">otra ip </label>
