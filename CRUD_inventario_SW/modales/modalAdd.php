@@ -1,4 +1,4 @@
-    <div class="modal fade" id="agregarSoftwareModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="agregarSoftwareModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -116,11 +116,20 @@
                             <label class="form-label">Antivirus</label>
                             <input type="text" name="Antivirus" class="form-control" required/> 
                         </div>
+                        <!-- fecha -->
+                        <div class="mb-3">
+                            <label for="fecha" class="form-label">Fecha de Inicio</label>
+                            <input type="date" name="fecha_inicio"class="form-control"  value="<?php echo $fechaHoy; ?>"required>
+                        </div>
+                        <?php
+                        // Obtener la fecha actual en formato YYYY-MM-DD
+                        $fechaHoy = date('Y-m-d');
+                        ?>
                         <!-- ip_i -->
                         <div class="row">
                         <div class="col-md-6">
                             <label class="form-label">Ip interna </label>
-                            <input type="text" name="ip_i " class="form-control" required/>
+                            <input type="text" name="ip_i" class="form-control" required/>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">otra ip </label>

@@ -62,6 +62,7 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
       document.querySelector("#ip03").value = ip03;
       document.querySelector("#maclan").value = maclan;
       document.querySelector("#macwifi").value = macwifi;
+      seleccionarOffice(ID_equipo)
       seleccionarwindows(ver_windows);
       seleccionarOffice(ver_office);
     } else {
@@ -74,8 +75,12 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
 }
 
 /**
- * Función para seleccionar windows del Software
+ * Función para seleccionar del Software
  */
+function seleccionarOffice(select_equipo) {
+  const selectID_equipo = document.querySelector("#ID_equipo");
+  selectID_equipo.value = select_equipo;
+}
 function seleccionarwindows(windowsSoftware) {
   const selectwindows = document.querySelector("#ver_windows");
   selectwindows.value = windowsSoftware;
@@ -85,15 +90,33 @@ function seleccionarOffice(OfficeSoftware) {
   selectOffice.value = OfficeSoftware;
 }
 
+// Función para validar antes de enviar
 async function actualizarSoftware(event) {
+  event.preventDefault(); // Evitar que la página se recargue al enviar el formulario
+
+  const formulario = document.querySelector("#formularioSoftwareEdit");
+  const formData = new FormData(formulario);
+
+  // Validación: Revisar si algún campo requerido está vacío
+  let camposVacios = false;
+
+  formulario.querySelectorAll("input[required], select[required]").forEach(function(input) {
+      if (!input.value.trim()) {
+          camposVacios = true;
+          input.classList.add("is-invalid"); // Resalta el campo vacío
+      } else {
+          input.classList.remove("is-invalid"); // Quita el resaltado si el campo no está vacío
+      }
+  });
+
+  // Si hay campos vacíos, mostrar alerta y evitar el envío
+  if (camposVacios) {
+      toastr.options = window.toastrOptions;
+      toastr.error("Por favor, complete todos los campos requeridos.");
+      return; // Salir de la función y no enviar el formulario
+  }
+
   try {
-    event.preventDefault();
-
-    const formulario = document.querySelector("#formularioSoftwareEdit");
-    // Crear un objeto FormData para enviar los datos del formulario
-    const formData = new FormData(formulario);
-    const IDSoftware = formData.get("ID");
-
     // Enviar los datos del formulario al backend usando Axios
     const response = await axios.post("acciones/updateSoftware.php", formData);
 
@@ -102,13 +125,11 @@ async function actualizarSoftware(event) {
       console.log("Software actualizado exitosamente");
 
       // Llamar a la función para actualizar la tabla de Software
-      window.actualizarSoftwareEdit(IDSoftware);
+      window.actualizarSoftwareEdit(formData.get("ID"));
 
-      //Llamar a la función para mostrar un mensaje de éxito
-      if (window.toastrOptions) {
-        toastr.options = window.toastrOptions;
-        toastr.success("¡El Software se actualizo correctamente!.");
-      }
+      // Llamar a la función para mostrar un mensaje de éxito
+      toastr.options = window.toastrOptions;
+      toastr.success("¡El Software se actualizó correctamente!");
 
       setTimeout(() => {
         $("#editarSoftwareModal").css("opacity", "");
@@ -121,3 +142,4 @@ async function actualizarSoftware(event) {
     console.error("Error al enviar el formulario", error);
   }
 }
+

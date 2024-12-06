@@ -40,56 +40,50 @@ async function modalRegistrarSoftware() {
 }
 
 
-/**
- * Función para enviar el formulario al backend
- */
+// Función para validar antes de enviar
 async function registrarSoftware(event) {
-  try {
-    event.preventDefault(); // Evitar que la página se recargue al enviar el formulario
-    
-    const formulario = document.querySelector("#formularioSoftware");
-    const formData = new FormData(formulario);
+  event.preventDefault(); // Evitar que la página se recargue al enviar el formulario
+  
+  const formulario = document.querySelector("#formularioSoftware");
+  const formData = new FormData(formulario);
 
-    // Validación: Revisar si algún campo requerido está vacío
-    let camposVacios = false;
+  // Validación: Revisar si algún campo requerido está vacío
+  let camposVacios = false;
 
-    formulario.querySelectorAll("input[required], select[required]").forEach(function(input) {
+  formulario.querySelectorAll("input[required], select[required]").forEach(function(input) {
       if (!input.value.trim()) {
           camposVacios = true;
           input.classList.add("is-invalid"); // Resalta el campo vacío
-        
       } else {
-        input.classList.remove("is-invalid"); // Quita el resaltado si el campo no está vacío
+          input.classList.remove("is-invalid"); // Quita el resaltado si el campo no está vacío
       }
-    });
+  });
 
-    // Si hay campos vacíos, mostrar alerta y evitar el envío
-    if (camposVacios) {
+  // Si hay campos vacíos, mostrar alerta y evitar el envío
+  if (camposVacios) {
       toastr.options = window.toastrOptions;
       toastr.error("Por favor, complete todos los campos requeridos.");
       return; // Salir de la función y no enviar el formulario
-    }
+  }
 
-    // Si todos los campos son válidos, enviar los datos al backend
-    const response = await axios.post("acciones/acciones.php", formData);
+  // Si todos los campos son válidos, enviar los datos al backend
+  const response = await axios.post("acciones/acciones.php", formData);
 
-    if (response.status === 200) {
+  if (response.status === 200) {
       // Llamar a la función insertSoftwareTable para insertar el nuevo registro en la tabla
       window.insertSoftwareTable();
 
       setTimeout(() => {
-        $("#agregarSoftwareModal").css("opacity", "");
-        $("#agregarSoftwareModal").modal("hide");
+          $("#agregarSoftwareModal").css("opacity", "");
+          $("#agregarSoftwareModal").modal("hide");
 
-        // Mensaje de éxito
-        toastr.options = window.toastrOptions;
-        toastr.success("¡El Software se registró correctamente!");
+          // Mensaje de éxito
+          toastr.options = window.toastrOptions;
+          toastr.success("¡El Software se registró correctamente!");
       }, 600);
-    } else {
+  } else {
       console.error("Error al registrar el Software");
-    }
-  } catch (error) {
-    console.error("Error al enviar el formulario", error);
   }
 }
+
 
