@@ -117,14 +117,14 @@
                             <input type="text" name="Antivirus" class="form-control" required/> 
                         </div>
                         <!-- fecha -->
-                        <div class="mb-3">
-                            <label for="fecha" class="form-label">Fecha de Inicio</label>
-                            <input type="date" name="fecha_inicio"class="form-control"  value="<?php echo $fechaHoy; ?>"required>
-                        </div>
                         <?php
                         // Obtener la fecha actual en formato YYYY-MM-DD
                         $fechaHoy = date('Y-m-d');
                         ?>
+                        <div class="mb-3">
+                            <label for="fecha" class="form-label">Fecha de Inicio</label>
+                            <input type="date" name="fecha_inicio"class="form-control"  value="<?php echo $fechaHoy; ?>"required>
+                        </div>
                         <!-- ip_i -->
                         <div class="row">
                         <div class="col-md-6">

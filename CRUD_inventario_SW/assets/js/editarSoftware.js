@@ -7,10 +7,7 @@ async function editarSoftware(IDSoftware) {
     const existingModal = document.getElementById("editarSoftwareModal");
     if (existingModal) {
       const modal = bootstrap.Modal.getInstance(existingModal);
-      if (modal) {
-        modal.hide();
-      }
-      existingModal.remove(); // Eliminar la modal existente
+      modal.hide(); // Cerrar la modal
     }
 
     const response = await fetch("modales/modalEditar.php");
@@ -19,18 +16,13 @@ async function editarSoftware(IDSoftware) {
     }
     const modalHTML = await response.text();
 
-    // Crear un elemento div para almacenar el contenido de la modal
+    // Crear un contenedor para la modal
     const modalContainer = document.createElement("div");
     modalContainer.innerHTML = modalHTML;
+    document.body.appendChild(modalContainer); // Agregar al body
 
-    // Agregar la modal al documento actual
-    document.body.appendChild(modalContainer);
-
-    // Mostrar la modal
-    const myModal = new bootstrap.Modal(
-      modalContainer.querySelector("#editarSoftwareModal")
-    );
-    myModal.show();
+    const myModal = new bootstrap.Modal(modalContainer.querySelector("#editarSoftwareModal"));
+    myModal.show(); // Mostrar la modal
 
     await cargarDatosSoftwareEditar(IDSoftware);
   } catch (error) {
@@ -39,21 +31,18 @@ async function editarSoftware(IDSoftware) {
 }
 
 /**
- * Función buscar información del Software seleccionado y cargarla en la modal
+ * Función para cargar los datos del software en la modal
  */
 async function cargarDatosSoftwareEditar(IDSoftware) {
   try {
-    const response = await axios.get(
-      `acciones/detallesSoftware.php ? ID=${IDSoftware}`
-    );
+    const response = await axios.get(`acciones/detallesSoftware.php?ID=${IDSoftware}`);
     if (response.status === 200) {
-      const { ID,ID_equipo,ver_windows,Key_W,ver_office,Key_of,Antivirus,ip_i,otra_ip ,ip02,ip03,maclan,macwifi} =
-      response.data;
+      const { ID, ID_equipo, ver_windows, Key_W, ver_office, Key_of, Antivirus, ip_i, otra_ip, ip02, ip03, maclan, macwifi } = response.data;
 
-      console.log(ID,ID_equipo,ver_windows,Key_W,ver_office,Key_of,Antivirus,ip_i,otra_ip ,ip02,ip03,maclan,macwifi);
+      // Asignar los valores a los campos
       document.querySelector("#IDSoftware").value = ID;
       document.querySelector("#ID_equipo").value = ID_equipo;
-      document.querySelector("#Key_W").value = Key_W; 
+      document.querySelector("#Key_W").value = Key_W;
       document.querySelector("#Key_of").value = Key_of;
       document.querySelector("#Antivirus").value = Antivirus;
       document.querySelector("#ip_i").value = ip_i;
@@ -62,9 +51,10 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
       document.querySelector("#ip03").value = ip03;
       document.querySelector("#maclan").value = maclan;
       document.querySelector("#macwifi").value = macwifi;
-      seleccionarOffice(ID_equipo)
-      seleccionarwindows(ver_windows);
-      seleccionarOffice(ver_office);
+
+      seleccionarEquipo(ID_equipo);
+      seleccionarWindows(ver_windows);
+      seleccionarOfficeVersion(ver_office);
     } else {
       console.log("Error al cargar el Software a editar");
     }
@@ -75,65 +65,63 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
 }
 
 /**
- * Función para seleccionar del Software
+ * Función para seleccionar el ID del equipo
  */
-function seleccionarOffice(select_equipo) {
+function seleccionarEquipo(select_equipo) {
   const selectID_equipo = document.querySelector("#ID_equipo");
   selectID_equipo.value = select_equipo;
 }
-function seleccionarwindows(windowsSoftware) {
+
+/**
+ * Función para seleccionar la versión de Windows
+ */
+function seleccionarWindows(windowsSoftware) {
   const selectwindows = document.querySelector("#ver_windows");
   selectwindows.value = windowsSoftware;
 }
-function seleccionarOffice(OfficeSoftware) {
+
+/**
+ * Función para seleccionar la versión de Office
+ */
+function seleccionarOfficeVersion(OfficeSoftware) {
   const selectOffice = document.querySelector("#ver_office");
   selectOffice.value = OfficeSoftware;
 }
 
-// Función para validar antes de enviar
+/**
+ * Función para validar antes de enviar el formulario
+ */
 async function actualizarSoftware(event) {
-  event.preventDefault(); // Evitar que la página se recargue al enviar el formulario
+  event.preventDefault(); // Evitar la recarga de la página al enviar el formulario
 
   const formulario = document.querySelector("#formularioSoftwareEdit");
   const formData = new FormData(formulario);
 
-  // Validación: Revisar si algún campo requerido está vacío
+  // Validación de campos requeridos
   let camposVacios = false;
 
   formulario.querySelectorAll("input[required], select[required]").forEach(function(input) {
-      if (!input.value.trim()) {
-          camposVacios = true;
-          input.classList.add("is-invalid"); // Resalta el campo vacío
-      } else {
-          input.classList.remove("is-invalid"); // Quita el resaltado si el campo no está vacío
-      }
+    if (!input.value.trim()) {
+      camposVacios = true;
+      input.classList.add("is-invalid"); // Resaltar campo vacío
+    } else {
+      input.classList.remove("is-invalid");
+    }
   });
 
-  // Si hay campos vacíos, mostrar alerta y evitar el envío
   if (camposVacios) {
-      toastr.options = window.toastrOptions;
-      toastr.error("Por favor, complete todos los campos requeridos.");
-      return; // Salir de la función y no enviar el formulario
+    toastr.options = window.toastrOptions;
+    toastr.error("Por favor, complete todos los campos requeridos.");
+    return;
   }
 
   try {
-    // Enviar los datos del formulario al backend usando Axios
     const response = await axios.post("acciones/updateSoftware.php", formData);
-
-    // Verificar la respuesta del backend
     if (response.status === 200) {
-      console.log("Software actualizado exitosamente");
-
-      // Llamar a la función para actualizar la tabla de Software
-      window.actualizarSoftwareEdit(formData.get("ID"));
-
-      // Llamar a la función para mostrar un mensaje de éxito
-      toastr.options = window.toastrOptions;
       toastr.success("¡El Software se actualizó correctamente!");
-
       setTimeout(() => {
-        $("#editarSoftwareModal").css("opacity", "");
-        $("#editarSoftwareModal").modal("hide");
+        const modal = bootstrap.Modal.getInstance(document.getElementById("editarSoftwareModal"));
+        modal.hide(); // Ocultar la modal
       }, 600);
     } else {
       console.error("Error al actualizar el Software");
