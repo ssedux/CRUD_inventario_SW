@@ -8,8 +8,11 @@ async function editarSoftware(IDSoftware) {
     if (existingModal) {
       const modal = bootstrap.Modal.getInstance(existingModal);
       modal.hide(); // Cerrar la modal
+      // Eliminar el modal del DOM
+      existingModal.remove();
     }
 
+    // Cargar la modal desde el servidor
     const response = await fetch("modales/modalEditar.php");
     if (!response.ok) {
       throw new Error("Error al cargar la modal de editar el Software");
@@ -29,7 +32,24 @@ async function editarSoftware(IDSoftware) {
     console.error(error);
   }
 }
+// Limpiar los campos al cerrar el modal
+const modalElement = document.getElementById("editarSoftwareModal");
+if (modalElement) {
+  modalElement.addEventListener('hidden.bs.modal', function () {
+    // Limpiar los campos del formulario al cerrar el modal
+    document.querySelector("#formularioSoftwareEdit").reset();
+    // También puedes asegurarte de que las clases de error se eliminen
+    document.querySelectorAll("input, select").forEach(input => {
+      input.classList.remove("is-invalid");
+    });
+  });
+}
 
+
+
+/**
+ * Función para cargar los datos del software en la modal
+ */
 /**
  * Función para cargar los datos del software en la modal
  */
@@ -39,7 +59,7 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
     if (response.status === 200) {
       const { ID, ID_equipo, ver_windows, Key_W, ver_office, Key_of, Antivirus, ip_i, otra_ip, ip02, ip03, maclan, macwifi } = response.data;
 
-      // Asignar los valores a los campos
+      // Asignar los valores a los campos del formulario
       document.querySelector("#IDSoftware").value = ID;
       document.querySelector("#ID_equipo").value = ID_equipo;
       document.querySelector("#Key_W").value = Key_W;
@@ -52,7 +72,8 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
       document.querySelector("#maclan").value = maclan;
       document.querySelector("#macwifi").value = macwifi;
 
-      seleccionarEquipo(ID_equipo);
+      // Seleccionar el equipo y otros valores
+      await cargarEquipos(ID_equipo);
       seleccionarWindows(ver_windows);
       seleccionarOfficeVersion(ver_office);
     } else {
@@ -63,6 +84,30 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
     alert("Hubo un problema al cargar los detalles del Software");
   }
 }
+
+/**
+ * Función para cargar los equipos disponibles en el select
+ */
+async function cargarEquipos(ID_equipo) {
+  const selectIDequipo = document.querySelector("#ID_equipo");
+  try {
+    const response = await fetch("acciones/cargarEquipos.php"); // Crear este archivo que retorna todos los equipos disponibles.
+    const equipos = await response.json();
+
+    if (equipos.length > 0) {
+      selectIDequipo.innerHTML = "<option value=''>Seleccione</option>";
+      equipos.forEach(equipo => {
+        const selected = equipo.N_inventario === ID_equipo ? "selected" : "";
+        selectIDequipo.innerHTML += `<option value="${equipo.N_inventario}" ${selected}>${equipo.N_inventario}</option>`;
+      });
+    } else {
+      selectIDequipo.innerHTML = "<option>No se encontraron equipos</option>";
+    }
+  } catch (error) {
+    console.error("Error al cargar los equipos: ", error);
+  }
+}
+
 
 /**
  * Función para seleccionar el ID del equipo

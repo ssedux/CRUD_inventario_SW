@@ -4,7 +4,7 @@
 async function modalRegistrarSoftware() {
   try {
     // Ocultar la modal si está abierta
-    const existingModal = document.getElementById("detalleSoftwareModal");
+    const existingModal = document.getElementById("agregarSoftwareModal");
     if (existingModal) {
       const modal = bootstrap.Modal.getInstance(existingModal);
       if (modal) {
@@ -33,11 +33,26 @@ async function modalRegistrarSoftware() {
     const myModal = new bootstrap.Modal(
       modalContainer.querySelector("#agregarSoftwareModal")
     );
+    
+    // Reiniciar el formulario para eliminar cualquier error anterior
+    resetFormulario(modalContainer.querySelector("#formularioSoftware"));
+    
     myModal.show();
   } catch (error) {
     console.error(error);
   }
 }
+
+function resetFormulario(formulario) {
+  // Limpiar clases de error
+  formulario.querySelectorAll("input.is-invalid, select.is-invalid").forEach(function(input) {
+    input.classList.remove("is-invalid");
+  });
+
+  // Limpiar todos los campos
+  formulario.reset();
+}
+
 
 
 // Función para validar antes de enviar
@@ -85,5 +100,6 @@ async function registrarSoftware(event) {
       console.error("Error al registrar el Software");
   }
 }
+
 
 

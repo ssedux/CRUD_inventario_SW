@@ -4,8 +4,6 @@
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 titulo_modal">Registrar Nuevo Software</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
-
-             
                 </div>
                 <div class="modal-body">
                     <form id="formularioSoftware" action="" method="POST" enctype="multipart/form-data" autocomplete="off">
@@ -122,7 +120,7 @@
                         $fechaHoy = date('Y-m-d');
                         ?>
                         <div class="mb-3">
-                            <label for="fecha" class="form-label">Fecha de Inicio</label>
+                            <label class="form-label">Fecha de Inicio</label>
                             <input type="date" name="fecha_inicio"class="form-control"  value="<?php echo $fechaHoy; ?>"required>
                         </div>
                         <!-- ip_i -->
