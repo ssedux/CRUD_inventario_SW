@@ -27,11 +27,6 @@
                             if ($conn->connect_error) {
                                 die("Connection failed: " . $conn->connect_error);
                             }
-
-                            // Obtener el ID del software desde el modal
-                            $IDSoftware = isset($_GET['ID']) ? $_GET['ID'] : null;  // Asumimos que el ID se pasa en la URL
-
-                            
                         
                             // Consulta SQL para obtener los N_inventario que no tienen un ID_equipo asignado
                             $sql = "
@@ -62,6 +57,7 @@
                             // Cerrar la conexión
                             $conn->close();
                         ?>
+                        
                     </select>
 
 

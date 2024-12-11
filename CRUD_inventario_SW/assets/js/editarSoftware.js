@@ -45,8 +45,6 @@ if (modalElement) {
   });
 }
 
-
-
 /**
  * Función para cargar los datos del software en la modal
  */
@@ -61,7 +59,7 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
 
       // Asignar los valores a los campos del formulario
       document.querySelector("#IDSoftware").value = ID;
-      document.querySelector("#ID_equipo").value = ID_equipo;
+      document.querySelector("#ID_equipo").value = ID_equipo; // Aquí asignamos el ID_equipo
       document.querySelector("#Key_W").value = Key_W;
       document.querySelector("#Key_of").value = Key_of;
       document.querySelector("#Antivirus").value = Antivirus;
@@ -73,7 +71,8 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
       document.querySelector("#macwifi").value = macwifi;
 
       // Seleccionar el equipo y otros valores
-      await cargarEquipos(ID_equipo);
+      await cargarEquipos(ID_equipo);  // Cargar los equipos disponibles y resaltar el seleccionado
+      seleccionarEquipo(ID_equipo);
       seleccionarWindows(ver_windows);
       seleccionarOfficeVersion(ver_office);
     } else {
@@ -91,7 +90,7 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
 async function cargarEquipos(ID_equipo) {
   const selectIDequipo = document.querySelector("#ID_equipo");
   try {
-    const response = await fetch("acciones/cargarEquipos.php"); // Crear este archivo que retorna todos los equipos disponibles.
+    const response = await fetch("acciones/cargarEquipos.php");  // Asume que esta ruta devuelve los equipos
     const equipos = await response.json();
 
     if (equipos.length > 0) {
@@ -107,6 +106,8 @@ async function cargarEquipos(ID_equipo) {
     console.error("Error al cargar los equipos: ", error);
   }
 }
+
+
 
 
 /**
