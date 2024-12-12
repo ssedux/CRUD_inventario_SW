@@ -1,31 +1,34 @@
+// Define la función globalmente adjuntándola al objeto window
 window.actualizarSoftwareEdit = async function (IDSoftware) {
   try {
-    const response = await axios.get(`acciones/getSoftware.php?id=${IDSoftware}`);
+    const response = await axios.get(
+      `acciones/getSoftware.php?ID=${IDSoftware}`
+    );
     if (response.status === 200) {
-      const infoSoftware = response.data; // Obtener los datos del Software desde la respuesta
-      console.log(infoSoftware); // Verifica que los datos están llegando correctamente
+      const infoSoftware = response.data; // Obtener los datos del empleado desde la respuesta
 
       let tr = document.querySelector(`#Software_${IDSoftware}`);
-      if (tr) {
-        console.log("Fila encontrada:", tr); // Verifica que la fila fue encontrada
+      let tablaHTML = "";
+      tablaHTML += `
+            <tr ID="Software_${infoSoftware.ID}">
+            <th class="dt-type-numeric sorting_1" scope="row">${infoSoftware.ID}</th>
+            <td>${infoSoftware.ID_equipo}</td>
+            <td>${infoSoftware.ver_windows}</td>
+            <td>${infoSoftware.ver_office}</td>
+            <td>${infoSoftware.Antivirus}</td>
+            <td>${infoSoftware.fecha_inicio}</td>
 
-        // Actualizar las celdas de la fila con los nuevos datos
-        tr.querySelector('th').textContent = infoSoftware.ID;
-        tr.querySelector('td:nth-child(2)').textContent = infoSoftware.ID_equipo;
-        tr.querySelector('td:nth-child(3)').textContent = infoSoftware.ver_windows;
-        tr.querySelector('td:nth-child(4)').textContent = infoSoftware.ver_office;
-        tr.querySelector('td:nth-child(5)').textContent = infoSoftware.Antivirus;
-        tr.querySelector('td:nth-child(6)').textContent = infoSoftware.fecha_inicio;
+          <td>
+          <a title="Ver detalles del Software" href="#" onclick="verDetallesSoftware(${infoSoftware.ID})" class="btn btn-success"><i class="bi bi-binoculars"></i></a>
+          <a title="Editar datos del Software" href="#" onclick="editarSoftware(${infoSoftware.ID})" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+          <a title="Eliminar datos del Software" href="#" onclick="eliminarSoftware(${infoSoftware.ID})" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+          </td>
+        `;
 
-        // Actualizar los enlaces en la última columna
-        tr.querySelector('a[title="Ver detalles del Software"]').setAttribute('onclick', `verDetallesSoftware(${infoSoftware.ID})`);
-        tr.querySelector('a[title="Editar datos del Software"]').setAttribute('onclick', `editarSoftware(${infoSoftware.ID})`);
-        tr.querySelector('a[title="Eliminar datos del Software"]').setAttribute('onclick', `eliminarSoftware(${infoSoftware.ID})`);
-      } else {
-        console.log("Fila no encontrada con ID:", IDSoftware); // Si no encuentra la fila
-      }
+      // Actualizar el contenido HTML de la tabla
+      tr.innerHTML = tablaHTML;
     }
   } catch (error) {
-    console.error("Error al obtener la información del Software", error);
+    console.error("Error al obtener la información del empleado", error);
   }
 };
