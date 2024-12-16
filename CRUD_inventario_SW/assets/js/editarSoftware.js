@@ -177,3 +177,5 @@ async function actualizarSoftware(event) {
   }
 }
 
+
+

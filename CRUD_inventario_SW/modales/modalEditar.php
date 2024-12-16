@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <form id="formularioSoftwareEdit" action="" method="POST" enctype="multipart/form-data" autocomplete="off">
-                    <input type="hidden" name="ID" id="IDSoftware" />
+                    <input type="text" name="ID" id="IDSoftware" />
                     <!-- ID_equipo -->
                     <div class="mb-3">
                     <label class="form-label">ID Equipo</label>
@@ -28,18 +28,21 @@
                             die("Connection failed: " . $conn->connect_error);
                         }
                         
-                        // ID del software que se está editando
-                        $ID_equipo_software = isset($ID_equipo_software) ? $ID_equipo_software : null;
+                        $IDSoftware = $_POST['ID'] ? $_POST['ID']:18;
                         
                         // Consulta SQL para obtener los N_inventario que no tienen un ID_equipo asignado
                         $sql = "
-                            SELECT N_inventario 
-                            FROM inventariof 
+                            SELECT N_inventario
+                            FROM inventariof
                             WHERE N_inventario NOT IN (
-                                SELECT ID_equipo 
-                                FROM inventario_sw 
+                                SELECT ID_equipo
+                                FROM inventario_sw
                                 WHERE ID_equipo IS NOT NULL
-                            )";
+                            )
+                            union all
+                            SELECT id_equipo as N_inventario
+                            FROM inventario_sw
+                            where id =$IDSoftware";
                             
                         // Si hay un equipo específico editándose, incluirlo en la lista
                         if ($ID_equipo_software) {

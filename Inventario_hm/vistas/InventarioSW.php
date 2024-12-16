@@ -21,7 +21,14 @@
 
     <title>Inventario Software</title>
 </head>
-<!--barra lateral -->
+
+<body>
+    <div class="contenido-fondo">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.</p>
+        <p>Curabitur ut erat ac odio tempus varius. In a velit ut libero vulputate sollicitudin.</p>
+    </div>
+
+    <!--barra lateral -->
 <div class="barra-lateral ">
         <img class="logonav" id="logo" src="../img/LOGO-min.png" alt=""> 
         <nav class="navegacion">
@@ -59,10 +66,6 @@
             </div>
         </div>
     </div>
-<body>
-    
-    
-
     <script src="https://kit.fontawesome.com/efdbd9f540.js" crossorigin="anonymous"></script>
     <script src="../script/navbar.js"></script>
 </body>
