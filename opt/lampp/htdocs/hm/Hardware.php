@@ -17,40 +17,101 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    <!-- diseño barra lateral -->
+    <link rel="stylesheet" href="assets/css/navstyle.css">
+    <link rel="stylesheet" href="assets/css/styleSW.css">    
+    
+    
+        <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-    <?php
+    <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                        <?php
+			    include("menu-lateral.php");
+			    ?>
+        </nav>
+    </aside>
+    <!-- /#left-panel -->
+        <div id="right-panel" class="right-panel">
+        <!-- Header-->
+        <header id="header" class="header">
+            <div class="top-left">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="./"><img src="images/LOGO-min.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+                   </header>
+        <!-- /#header -->
+   <!-- Right Panel -->
+   
+   
+		  <div class="row">
+		  
+		      <?php
     include("config/config.php");
     include("acciones/acciones.php");
 
     $Software = obtenerSoftware($conexion);
     $totalSoftware = $Software->num_rows;
     ?>
-
-    <h1 class="text-center mt-5 mb-5 fw-bold">Inventario Software</h1>
+		  <h1 class="text-center mt-5 mb-5 fw-bold">Inventario de Hardware</h1>
 
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-md-12">
                 <h1 class="text-center">
-                    <span class="float-start">
-                        <a href="#" onclick="modalRegistrarSoftware()" class="btn btn-success" title="Registrar Nuevo Software">
-                        <i class="fa-solid fa-folder-plus"></i>
-                        </a>
-                    </span>
-                    Lista de Software (<?php echo $totalSoftware ?>)
-                    <span class="float-end">
-                        <a href="acciones/exportar.php" class="btn btn-success" title="Exportar a CSV" download="Software.csv"><i class="bi bi-filetype-csv"></i></a>
-                    </span>
-                    <hr>
+                    
                 </h1>
-                <?php
-                include("Software.php"); ?>
+                
+                   <!-- Aqui el contenido de hardware -->
+                
+                
+                
+                
             </div>
         </div>
     </div>
+		  
+		  
+		  
+			
+ 
+ 
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-inner bg-white">
+                <div class="row">
+                    <div class="col-sm-6">
+                        Copyright &copy; 2024 Eduardo Sanchez
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        Designed by <a href="https://colorlib.com">SSEDUX</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- /.site-footer -->
+    </div>
+    <!-- /#right-panel -->
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/efdbd9f540.js" crossorigin="anonymous"></script>
+    <script src="assets/js/navbar.js"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="assets/js/main.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -77,6 +138,15 @@
         });
     </script>
 
+
+
 </body>
 
 </html>
+
+
+
+
+
+
+

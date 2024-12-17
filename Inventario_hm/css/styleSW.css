@@ -17,3 +17,43 @@ body{
     color: var(--color-texto);
     transition: background-color .3s ease;
 }
+li .list-group-item{
+    background: var(--color-barra-lateral);
+    color: var(--color-texto);
+}
+div .modal-header{
+    background: var(--color-barra-lateral);
+}
+div .modal-body{
+    background: var(--color-barra-lateral);
+}
+select{
+    
+}
+button .btn-close{
+    background: var(--color-texto-menu);
+}
+td{
+    color: red;
+}
+th{
+    color: var(--color-texto);
+}
+h1{
+    color: var(--color-texto);
+}
+h5{
+    color: var(--color-texto);
+}
+
+label{
+    color: var(--color-texto);
+}
+span{
+    color: var(--color-texto);
+}
+span .nav-item{
+    color: var(--color-texto-menu);
+}
+
+

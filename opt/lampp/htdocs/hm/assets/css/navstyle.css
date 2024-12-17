@@ -32,30 +32,16 @@
 }
 
 
-/* Contenedor principal */
-.contenedor {
-    display: flex;               /* Usamos flexbox para alinear los elementos */
-    height: 100vh;               /* Ocupa toda la altura de la ventana */
-}
-/* Barra lateral */
+/*BARRA LATERAL*/
 .barra-lateral{
-    width: 230px;                /* Tamaño fijo de la barra lateral */
+    width: auto;
+    height: 100%;
     overflow: hidden;
     background-color: var(--color-barra-lateral);
+    transition: width 0.5s ease, background-color 0.3s ease;
     box-shadow: 0 20px 35px rgba(0,0,0,0.1);
     padding-top: 10px;
     box-sizing: border-box;
-    transition: width 0.5s ease, background-color 0.3s ease;
-    height: 100%;                /* Asegura que la barra lateral ocupe toda la altura */
-}
-
-/* Estilo para la parte de contenido */
-.contenido-fondo{
-    flex-grow: 1;                /* Permite que el contenido ocupe el espacio restante */
-    padding: 20px;
-    overflow-y: auto;
-    background-color: var(--color-fondo); /* Fondo del contenido */
-    transition: width 0.5s ease, background-color 0.3s ease;
 }
 
 .mini-barra-lateral{

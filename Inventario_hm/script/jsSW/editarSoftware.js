@@ -13,7 +13,7 @@ async function editarSoftware(IDSoftware) {
     }
 
     // Cargar la modal desde el servidor
-    const response = await fetch("modales/modalEditar.php");
+    const response = await fetch("../modalesSW/modalEditar.php");
     if (!response.ok) {
       throw new Error("Error al cargar la modal de editar el Software");
     }
@@ -53,7 +53,7 @@ if (modalElement) {
  */
 async function cargarDatosSoftwareEditar(IDSoftware) {
   try {
-    const response = await axios.get(`acciones/detallesSoftware.php?ID=${IDSoftware}`);
+    const response = await axios.get(`../accionesSW/detallesSoftware.php?ID=${IDSoftware}`);
     if (response.status === 200) {
       const { ID, ID_equipo, ver_windows, Key_W, ver_office, Key_of, Antivirus, ip_i, otra_ip, ip02, ip03, maclan, macwifi } = response.data;
 
@@ -162,7 +162,7 @@ async function actualizarSoftware(event) {
   }
 
   try {
-    const response = await axios.post("acciones/updateSoftware.php", formData);
+    const response = await axios.post("accionesSW/updateSoftware.php", formData);
     if (response.status === 200) {
       toastr.success("¡El Software se actualizó correctamente!");
       setTimeout(() => {
