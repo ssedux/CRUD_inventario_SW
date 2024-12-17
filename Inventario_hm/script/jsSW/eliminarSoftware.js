@@ -42,42 +42,35 @@ async function cargarModalConfirmacion() {
  */
 async function eliminarSoftware(IDSoftware) {
   try {
-    // Llamar a la función para cargar y mostrar la modal de confirmación
     await cargarModalConfirmacion();
 
-    // Establecer el ID y la ruta del avatar del Software en el botón de confirmación
-    document
-      .getElementById("confirmDeleteBtn")
-      .setAttribute("data-id", IDSoftware);
+    // Establecer el ID del Software en el botón de confirmación
+    document.getElementById("confirmDeleteBtn").setAttribute("data-id", IDSoftware);
 
-    // Agregar un event listener al botón "Eliminar Software"
     document
       .getElementById("confirmDeleteBtn")
       .addEventListener("click", async function () {
-        // Obtener el ID del Software a eliminar
         var IDSoftware = this.getAttribute("data-id");
 
         try {
           const response = await axios.post("acciones/delete.php", {
-            id: IDSoftware,
+            id: IDSoftware,  // Enviar como 'id'
           });
 
           if (response.status === 200) {
-            // Eliminar la fila correspondiente a este Software de la tabla
             document.querySelector(`#Software_${IDSoftware}`).remove();
-            //Llamar a la función para mostrar un mensaje de éxito
+
             if (window.toastrOptions) {
               toastr.options = window.toastrOptions;
-              toastr.error("¡El Software se elimino correctamente!.");
+              toastr.error("¡El Software se eliminó correctamente!");
             }
           } else {
             alert(`Error al eliminar el Software con ID ${IDSoftware}`);
           }
         } catch (error) {
           console.error(error);
-          alert("Hubo un problema al eliminar al Software");
+          alert("Hubo un problema al eliminar el Software");
         } finally {
-          // Cerrar la modal de confirmación
           var confirmModal = bootstrap.Modal.getInstance(
             document.getElementById("confirmModal")
           );
@@ -89,3 +82,4 @@ async function eliminarSoftware(IDSoftware) {
     alert("Hubo un problema al cargar la modal de confirmación");
   }
 }
+

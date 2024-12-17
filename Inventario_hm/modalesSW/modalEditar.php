@@ -7,66 +7,55 @@
             </div>
             <div class="modal-body">
                 <form id="formularioSoftwareEdit" action="" method="POST" enctype="multipart/form-data" autocomplete="off">
-                    <input type="text" name="ID" id="IDSoftware" />
+                    <input type="hidden" name="ID" id="IDSoftware" />
                     <!-- ID_equipo -->
                     <div class="mb-3">
                     <label class="form-label">ID Equipo</label>
                     <select name="ID_equipo" id="ID_equipo" class="form-select" required>
                     <option value="">Seleccione</option>
-                    <?php
-                        // Conectar a la base de datos
-                        $servername = "localhost";
-                        $username = "root"; 
-                        $password = "";
-                        $dbname = "inventario";
-                        
-                        // Crear conexión
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-                        
-                        // Verificar la conexión
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
-                        
-                        $IDSoftware = $_POST['ID'] ? $_POST['ID']:18;
-                        
-                        // Consulta SQL para obtener los N_inventario que no tienen un ID_equipo asignado
-                        $sql = "
-                            SELECT N_inventario
-                            FROM inventariof
-                            WHERE N_inventario NOT IN (
-                                SELECT ID_equipo
-                                FROM inventario_sw
-                                WHERE ID_equipo IS NOT NULL
-                            )
-                            union all
-                            SELECT id_equipo as N_inventario
-                            FROM inventario_sw
-                            where id =$IDSoftware";
-                            
-                        // Si hay un equipo específico editándose, incluirlo en la lista
-                        if ($ID_equipo_software) {
-                            $sql .= " OR N_inventario = '$ID_equipo_software'";
-                        }
-                        
-                        // Ejecutar la consulta
-                        $result = $conn->query($sql);
-                        
-                        // Si hay resultados, mostrarlos en el combo box
-                        if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
-                                // Verificar si el N_inventario es el del software editado
-                                $selected = ($row["N_inventario"] == $ID_equipo_software) ? "selected" : "";
-                                echo "<option value='" . $row["N_inventario"] . "' $selected>" . $row["N_inventario"] . "</option>";
-                            }
-                        } else {
-                            echo "<option>No se encontraron registros</option>";
-                        }
-                        
-                        // Cerrar la conexión
-                        $conn->close();
-                        ?>
+                        <?php
+                            // Conectar a la base de datos
+                            include("../config/config.php");
 
+                            // Crear conexión
+                            $conn = new mysqli($host, $usuario, $contrasena, $base_de_datos);
+
+                            // Verificar la conexión
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
+                        
+                            // Consulta SQL para obtener los N_inventario que no tienen un ID_equipo asignado
+                            $sql = "
+                                SELECT N_inventario 
+                                FROM inventariof 
+                                WHERE N_inventario NOT IN (
+                                    SELECT ID_equipo 
+                                    FROM inventario_sw 
+                                    WHERE ID_equipo IS NOT NULL
+                                )
+            
+                            ";
+                        
+                            // Ejecutar la consulta
+                            $result = $conn->query($sql);
+                        
+                            
+                            // Si hay resultados, mostrarlos en el combo box
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    // Verificar si el N_inventario es el del software editado
+                                    $selected = ($row["N_inventario"] == $ID_equipo_software) ? "selected" : "";
+                                    echo "<option value='" . $row["N_inventario"] . "' $selected>" . $row["N_inventario"] . "</option>";
+                                }
+                            } else {
+                                echo "<option>No se encontraron registros</option>";
+                            }
+                        
+                            // Cerrar la conexión
+                            $conn->close();
+                        ?>
+                        
                     </select>
 
 

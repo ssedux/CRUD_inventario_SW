@@ -7,19 +7,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Decodificar los datos JSON en un array asociativo
     $data = json_decode($json_data, true);
 
-
     // Verificar si los datos se decodificaron correctamente
-    if ($data !== null) {
-        $ID = $data['ID'];
+    if ($data !== null && isset($data['id'])) {  // Cambia a 'id' en lugar de 'ID'
+        $ID = $data['id'];
 
-        $sql = "DELETE FROM inventario_sw WHERE ID=$ID";
-        if ($conexion->query($sql) === TRUE) {
+        $sql = "DELETE FROM inventario_sw WHERE ID = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("i", $ID);
+
+        if ($stmt->execute()) {
             echo json_encode(array("success" => true, "message" => "Software eliminado correctamente"));
         } else {
-            echo json_encode(array("success" => false, "message" => "El parámetro 'ID' no se proporcionó"));
+            echo json_encode(array("success" => false, "message" => "Error al eliminar el Software"));
         }
+
+        $stmt->close();
     } else {
-        // Si no se proporcionó el parámetro 'action', devolver un mensaje de error
-        echo json_encode(array("success" => false, "message" => "La acción no se proporcionó"));
+        echo json_encode(array("success" => false, "message" => "El parámetro 'id' no se proporcionó"));
     }
 }
+

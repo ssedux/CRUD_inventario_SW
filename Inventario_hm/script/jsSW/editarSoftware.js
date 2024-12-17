@@ -90,7 +90,7 @@ async function cargarDatosSoftwareEditar(IDSoftware) {
 async function cargarEquipos(ID_equipo) {
   const selectIDequipo = document.querySelector("#ID_equipo");
   try {
-    const response = await fetch("acciones/cargarEquipos.php");  // Asume que esta ruta devuelve los equipos
+    const response = await fetch("../accionesSW/cargarEquipos.php");  // Asume que esta ruta devuelve los equipos
     const equipos = await response.json();
 
     if (equipos.length > 0) {

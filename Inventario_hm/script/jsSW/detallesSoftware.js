@@ -1,42 +1,46 @@
 /**
  * Función para mostrar la modal de detalles del Software
  */
-async function verDetallesSoftware(IDSoftware) {
+async function eliminarSoftware(IDSoftware) {
   try {
-    // Ocultar la modal si está abierta
-    const existingModal = document.getElementById("detalleSoftwareModal");
-    if (existingModal) {
-      const modal = bootstrap.Modal.getInstance(existingModal);
-      if (modal) {
-        modal.hide();
-      }
-      existingModal.remove(); // Eliminar la modal existente
-    }
+    await cargarModalConfirmacion();
 
-    // Buscar la Modal de Detalles
-    const response = await fetch("../modalesSW/modalDetalles.php");
-    if (!response.ok) {
-      throw new Error("Error al cargar la modal de detalles del Software");
-    }
-    // response.text() es un método en programación que se utiliza para obtener el contenido de texto de una respuesta HTTP
-    const modalHTML = await response.text();
+    // Establecer el ID del Software en el botón de confirmación
+    document.getElementById("confirmDeleteBtn").setAttribute("data-id", IDSoftware);
 
-    // Crear un elemento div para almacenar el contenido de la modal
-    const modalContainer = document.createElement("div");
-    modalContainer.innerHTML = modalHTML;
+    document
+      .getElementById("confirmDeleteBtn")
+      .addEventListener("click", async function () {
+        var IDSoftware = this.getAttribute("data-id");
 
-    // Agregar la modal al documento actual
-    document.body.appendChild(modalContainer);
+        try {
+          const response = await axios.post("acciones/delete.php", {
+            id: IDSoftware,  // Enviar como 'id'
+          });
 
-    // Mostrar la modal
-    const myModal = new bootstrap.Modal(
-      modalContainer.querySelector("#detalleSoftwareModal")
-    );
-    myModal.show();
+          if (response.status === 200) {
+            document.querySelector(`#Software_${IDSoftware}`).remove();
 
-    await cargarDetalleSoftware(IDSoftware);
+            if (window.toastrOptions) {
+              toastr.options = window.toastrOptions;
+              toastr.error("¡El Software se eliminó correctamente!");
+            }
+          } else {
+            alert(`Error al eliminar el Software con ID ${IDSoftware}`);
+          }
+        } catch (error) {
+          console.error(error);
+          alert("Hubo un problema al eliminar el Software");
+        } finally {
+          var confirmModal = bootstrap.Modal.getInstance(
+            document.getElementById("confirmModal")
+          );
+          confirmModal.hide();
+        }
+      });
   } catch (error) {
     console.error(error);
+    alert("Hubo un problema al cargar la modal de confirmación");
   }
 }
 
@@ -46,7 +50,7 @@ async function verDetallesSoftware(IDSoftware) {
 async function cargarDetalleSoftware(IDSoftware) {
   try {
     const response = await axios.get(
-      `../accionesSW/detallesSoftware.php ? ID=${IDSoftware}`
+      `acciones/detallesSoftware.php ? ID=${IDSoftware}`
     );
     if (response.status === 200) {
       console.log(response.data);
